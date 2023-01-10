@@ -1,9 +1,14 @@
 import GameSavingLoader from './GameSavingLoader';
 
 GameSavingLoader.load().then((data) => {
-  console.log(1, data);
-  const obj = JSON.parse(data);
-  console.log(2, obj);
+  const buffer = new Uint16Array(data);
+  let result = '';
+  let i = 0;
+  while (buffer[i]) {
+    result += String.fromCharCode(buffer[i]);
+    i++;
+  }
+  console.log(1, result);
 }, (error) => {
   console.log(error);
 });
